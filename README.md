@@ -1,26 +1,21 @@
-# Accounting_system_1340
-An personal accounting system for ENGG1340
-Problem statement: With ever pervasive Internet access, an increasing number of people choose to use digital 
-tool to manage personal finance efficiently.
-However, published personal accounting system usually require payment for better user experience.
-For this project, it is going to be a free and opensource accounting system that can be customized for every user.
+# Banking Back-end Accounting System
 
-Problem setting: 
-Come up with an interective structure of the whole system;
-Implementing every features;
+HKU ENGG 1340 group project.
 
-Program features:
-(extra features are denoted with * )
-1. add income and expenses records;
-1.1 record stored information like: amount, date, type of income and expenses, account,;
-*1.1.1 Types can be customized;
-*1.1.2 Information catagories can be customized;
-1.2 record can be edited and deleted at any time;
-1.3 record can be viewed by date, type and account.
+## Problem Statement
 
-2. provide financial state reports monthly, annually or from the every beginnign.
-*2.1 financial state can be exported;
+By the aid of the rapid development of electronic technology over the past few decades, banking has no longer only been to deposit and withdraw money by handing a passbook and queueing in front of counters, but, with modern bank cards and Internet nowadays, banking also includes making purchases and consumptions via settlement network, managing various forms of assets on e-banking, etc. Transactions not only happen just in counters in the banks, but may also take place anytime anywhere. It is absolutely essential for modern banks to incoporate electronized automated accounting system to carry out transactions 7/24. This project aims to build a simple banking back-end accounting system to fulfill such demands.
 
-3. Budget setting with budget excess warning.
+## Program Features
 
-*4. Password setting
+The program serves as a back-end system of a bank such that customers at the front-end are able to
+
+- Open saving accounts linked with customer identity (KYC ID) and password (PIN)
+- Deposit and withdraw cash to/from saving accounts
+- Purchase commodities by a bank card associated with a saving account
+- Open time deposits
+- Receive interests of saving accounts and time deposits
+- Trasnfer money from a saving account to another
+- Close accounts
+
+For simplicity, instructions are to be given in the form of string in the command-line, and corresponding results will be shown in the command-line as well.
