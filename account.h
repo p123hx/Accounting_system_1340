@@ -29,7 +29,13 @@ class account
         std::string kyc;
         std::vector<transaction> transactions;
     public:
-        /* Constructor function of class account
+        /* Constructor function of class account for reading database
+         * input: id: the account number
+         * input: file_name: the file name which stores data
+         */
+        account(uint64_t id, std::string file_name);
+
+        /* Constructor function of class account for opening account
          * input: id: the account number
          * input: _pin: the PIN set by the customer when opening this account
          * input: _kyc: customer's legal indentification ID
