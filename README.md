@@ -19,3 +19,21 @@ The program serves as a back-end system of a bank such that customers at the fro
 - Close accounts
 
 For simplicity, instructions are to be given in the form of string in the command-line, and corresponding results will be shown in the command-line as well.
+
+## Internal data formats
+
+### Storage of monetary values
+
+Since IEEE floating point numbers come with limited precision, there would be information loss if we were to store monetary values using floating point numbers. For the sake of accuracy, in this project, we will be using 64-bit integers to represent monetary values. Specifically, considering the nature of Hong Kong Dollars, we will be storing monetary values in the unit of cents. That is, 12.34 HKD will be 1234 in the memory.
+
+### Account numbers
+
+In this project, account numbers are 64-bit, 10-digit integers, starting with 1 at highest digit, and ending with a checksum digit at lowest digit.
+
+### Transactions
+
+Each transaction consists of 5 parts of information, respectively the amount of money transferred, where the money is originated, where the money goes, the date when the transaction takes place, and the description of the transaction.
+
+### Account
+
+When opening account, a randomly picked free account number gets associated with customer's identification ID (a.k.a. KYC) and a 6-digit PIN set by the customer. Afterwards, whenever a transaction that withdraws money from the account is requested, the system verifies PIN, and executes the transaction if PIN matches.
