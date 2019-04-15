@@ -1,0 +1,8 @@
+# Object Files
+*.o
+
+# Target
+banking
+
+# Debugging Symbols
+*.dSYM
