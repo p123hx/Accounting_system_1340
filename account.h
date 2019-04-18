@@ -6,7 +6,7 @@
 #include <string>
 #include <cstdint>
 
-struct transaction
+struct Transaction
 {
     uint64_t from_account_id, to_account_id, value, date;
     std::string description;
@@ -17,25 +17,25 @@ struct transaction
      * input: d: the date when the transaction takes place
      * input: desc: the description of the transaction
      */
-    transaction(uint64_t from, uint64_t to, uint64_t v, uint64_t d, std::string desc) :
+    Transaction(uint64_t from, uint64_t to, uint64_t v, uint64_t d, std::string desc) :
         from_account_id(from), to_account_id(to), value(v), date(d), description(desc) {}
 };
 
-class account
+class Account
 {
     private:
-        uint64_t account_id;
+        uint64_t account_id, balance, date_of_interest;
         unsigned int pin;
         std::string kyc;
-        std::vector<transaction> transactions;
+        std::vector<Transaction> transactions;
     public:
         // Forbids default constructor
-        account() = delete;
+        Account() = delete;
 
         /* Constructor function of class account
          * input: id: the account number
          */
-        account(uint64_t id);
+        Account(uint64_t id);
 
         // Read from database
         void read();
