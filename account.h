@@ -45,7 +45,7 @@ class Account
 
         /* Initialization when opening this new account
          * input: _pin: the PIN set by the customer when opening this account
-         * input: _kyc: customer's legal indentification ID
+         * input: _kyc: customer's legal identification
          */
         void init(unsigned int _pin, std::string _kyc);
 
