@@ -15,7 +15,6 @@ private:
   int currentAccountNum;
 
   void authenticate();
-  int showMenu() const;
 };
 
 #endif
