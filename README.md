@@ -37,3 +37,21 @@ Each transaction consists of 5 parts of information, respectively the amount of 
 ### Account
 
 When opening account, a randomly picked free account number gets associated with customer's identification ID (a.k.a. KYC) and a 6-digit PIN set by the customer. Afterwards, whenever a transaction that withdraws money from the account is requested, the system verifies PIN, and executes the transaction if PIN matches.
+
+## Workflow
+
+On start-up, the user is required to key in their administrator user name and password to login the backend system.
+
+In the main loop, the program waits for command input, then processes the specified command, and displays result.
+
+| Command | Description |
+|---------|-------------|
+| `OPEN KYC PIN` | Open an account associated with customer identity `KYC` and a 6-digit password `PIN` |
+| `DEPOSIT ACCT VALUE` | Deposit `VALUE` amount of money, in cents, to acccount number `ACCT` |
+| `WITHDRAW ACCT VALUE PIN` | Attempt to withdraw `VALUE` amount of money, in cents, from account number `ACCT` with `PIN` |
+| `PURCHASE ACCT VALUE PIN` | Attempt to make a purchase at a POS of `VALUE` amount of money, in cents, from account number `ACCT` with `PIN` |
+| `TIME ACCT VALUE PIN PERIOD` | Attempt to a time deposit of `VALUE` amount of money, in cents, from account number `ACCT` with `PIN`, of period `PERIOD` in days |
+| `TRANSFER ACCT-FROM ACCT-TO VALUE PIN` | Attempt to transfer money from `ACCT-FROM` to `ACCT-TO` of `VALUE` amount of money, in cents, with `PIN` |
+| `SETTLE` | Settle interests of the day, and step a day in the calendar. |
+| `CLOSE ACCT PIN` | Attempt to close account `ACCT` with `PIN` |
+
