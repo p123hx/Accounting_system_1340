@@ -9,6 +9,7 @@ class Controller
 {
     private:
         std::map<uint64_t, Account*> accounts;
+        uint64_t calendar;
 
     public:
         // Read information from database on start up

@@ -19,45 +19,51 @@ struct Transaction
      */
     Transaction(uint64_t from, uint64_t to, uint64_t v, uint64_t d, std::string desc) :
         from_account_id(from), to_account_id(to), value(v), date(d), description(desc) {}
+    Transaction() {}
+};
+
+enum AccountType
+{
+    SAVING,
+    TIME
 };
 
 class Account
 {
-    private:
-        uint64_t account_id, balance, date_of_interest;
-        unsigned int pin;
-        std::string kyc;
-        std::vector<Transaction> transactions;
+    protected:
+        uint64_t account_id, balance, last_date_interest, next_date_interest;
+        AccountType account_type;
     public:
-        // Forbids default constructor
         Account() = delete;
+        Account(const uint64_t &id) { account_id = id; }
 
-        /* Constructor function of class account
-         * input: id: the account number
+        AccountType get_account_type() { return account_type; }
+
+        /* Read account information from disk file */
+        virtual void read() = 0;
+
+        /* Write account information into disk file */
+        virtual void write() = 0;
+
+        /* Generic function of initializing an account
+         * input: pin: PIN, only applicable to saving accounts
+         * input: kyc: KYC, only applicable to saving accounts
+         * input: value: Initial value of the account, only applicable to time deposits
+         * input: date_now: Current date
+         * input: date_next_interest: The date of next interest settlement
+         * input: associated_acct: The associated saving account, only applicable to time deposits
          */
-        Account(uint64_t id);
+        virtual void init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct) = 0;
 
-        // Read from database
-        void read();
-
-        // Write to database
-        void write();
-
-        /* Initialization when opening this new account
-         * input: _pin: the PIN set by the customer when opening this account
-         * input: _kyc: customer's legal identification
-         */
-        void init(unsigned int _pin, std::string _kyc);
-
-        /* Put money into this account
+        /* Put money into this account, only applicable to saving accounts
          * input: from: the account number which money comes from
          * input: v: the amount of money to be put in
          * input: d: the date of transaction
          * input: desc: the description of the transaction
          */
-        void put(const uint64_t &from, const uint64_t &v, const uint64_t d, const std::string &desc);
+        virtual void put(const uint64_t &from, const uint64_t &v, const uint64_t d, const std::string &desc) = 0;
 
-        /* Request to take money away from this account
+        /* Request to take money away from this account, only applicable to saving accounts
          * input: _pin: PIN given for this transaction
          * input: to: the destination of money
          * input: v: the amount of money to be taken out
@@ -65,7 +71,41 @@ class Account
          * input: desc: the description of the transaction
          * return: boolean value indicating if the transaction succeeds
          */
+        virtual bool take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) = 0;
+
+        /* Settle interest
+         * input: date: Current date
+         * */
+        virtual uint64_t settle(const uint64_t &date) = 0;
+};
+
+class SavingAccount : public Account
+{
+    protected:
+        unsigned int pin;
+        std::string kyc;
+        std::vector<Transaction> transactions;
+        uint64_t cumulative_balance;
+    public:
+        void read();
+        void write();
+        void init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct);
+        void put(const uint64_t &from, const uint64_t &v, const uint64_t d, const std::string &desc);
         bool take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc);
+        uint64_t settle(const uint64_t &date);
+};
+
+class TimeDeposit : public Account
+{
+    protected:
+        uint64_t saving_acct;
+    public:
+        void read();
+        void write();
+        void init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct);
+        void put(const uint64_t &from, const uint64_t &v, const uint64_t d, const std::string &desc) {}
+        bool take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) { return false; }
+        uint64_t settle(const uint64_t &date);
 };
 
 #endif // ACCOUNT_H_
