@@ -20,7 +20,7 @@ class Controller
          * input: desc: the description of the transaction
          * return: boolean value indicating if the transaction succeeds
          */
-        bool exec_transaction(const uint64_t &from, const uint64_t &to, const uin64_t &value, const unsigned int &pin, const uint64_t &date, const std::string &desc);
+        bool exec_transaction(const uint64_t &from, const uint64_t &to, const uint64_t &value, const std::string &pin, const uint64_t &date, const std::string &desc);
 
     public:
         // Read information from database on start up
@@ -44,7 +44,7 @@ class Controller
 
         bool purchase(const uint64_t &account_id, const uint64_t &value, const std::string &pin);
 
-        bool transfer(const uint64_t &from, const uint64_t &to, const uin64_t &value, const unsigned int &pin);
+        bool transfer(const uint64_t &from, const uint64_t &to, const uint64_t &value, const std::string &pin);
 
         bool time_deposit(const uint64_t &account_id, const uint64_t &value, const std::string &pin, const uint64_t &period);
 
