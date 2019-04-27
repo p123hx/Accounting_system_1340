@@ -7,7 +7,8 @@ extern "C" {
 
 #include <stdint.h>
 void init_rng(const uint32_t seed);
-uint64_t rng(uint64_t *state);
+uint64_t xorshift_rng(uint64_t *state);
+uint64_t rng();
 
 #ifdef __cplusplus
 }
