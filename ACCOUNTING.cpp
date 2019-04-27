@@ -27,9 +27,12 @@ ACCOUNTING::ACCOUNTING()
         // displaying the main menu
         std::cout<<"\nMain menu:\n" << " OPEN - Open an account\n"
         << " DEPOSIT - Deposit money\n" << " WITHDRAW - Withdraw money\n" << " PURCHASE - Purchase at a POS\n TIME - Attempt to a time deposit\n"
-        << " TRANSFER - Transfer\n SETTLE - Settle interests \n CLOSE - delete account \n EXIT - Exit the system\n";
+        << " TRANSFER - Transfer\n SETTLE - Settle interests \n CLOSE - delete account \n BALANCE - quiry the balance \n EXIT - Exit the system\n";
         std::string customerInput;
         std::cin >> customerInput;
+
+        // since stwich command support integer only, but in this system we insist the user to type in string command.
+        // open file
         if( customerInput == "OPEN")
         {
             std::cout << "Open an account:\nPlease enter customer identity\n";
@@ -47,6 +50,7 @@ ACCOUNTING::ACCOUNTING()
             else std::cout << "Your account is created, account number is:  "<< ACCT<< '\n';
         }
 
+        //
         else if (customerInput == "DEPOSIT")
         {
             std::cout << "please enter the account number you want to deposit to" << '\n';
@@ -119,6 +123,16 @@ ACCOUNTING::ACCOUNTING()
           controller.settle();
         }
 
+        else if (customerInput == "BALANCE")
+        {
+          std::cout << "please enter the account number you want to quiry" << '\n';
+          int ACCT; std::cin>>ACCT;
+          std::cout << "please enter your account PIN" << '\n';
+          std::string PIN; std::cin>>PIN;
+          std::cout<<controller.close_account(ACCT,PIN));
+        }
+
+
         else if (customerInput == "CLOSE")
         {
           std::cout << "please enter the account number you want to close" << '\n';
@@ -149,6 +163,7 @@ ACCOUNTING::ACCOUNTING()
   {
     std::cout<<("Entre your user name\n");
     std::string username;
+    std::cin >> username;
     // database is stored with the username as the filename;
     // failing in finding the file is equivalent to failing in finding the username
     std::ifstream fin;
