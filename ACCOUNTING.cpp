@@ -33,7 +33,7 @@ ACCOUNTING::ACCOUNTING()
         std::cin >> customerInput;
 
         // since stwich command support integer only, but in this system we insist the user to type in string command.
-        // open file
+        // open a new account number
         if( customerInput == "OPEN")
         {
             std::cout << "Open an account:\nPlease enter customer identity\n";
@@ -51,7 +51,7 @@ ACCOUNTING::ACCOUNTING()
             else std::cout << "Your account is created, account number is:  "<< ACCT<< '\n';
         }
 
-        //
+        // open deposit
         else if (customerInput == "DEPOSIT")
         {
             std::cout << "please enter the account number you want to deposit to" << '\n';
@@ -130,7 +130,7 @@ ACCOUNTING::ACCOUNTING()
           int ACCT; std::cin>>ACCT;
           std::cout << "please enter your account PIN" << '\n';
           std::string PIN; std::cin>>PIN;
-          std::cout<<controller.close_account(ACCT,PIN);
+          std::cout<<controller.query_balance(ACCT,PIN) << std::endl;
         }
 
 
