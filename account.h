@@ -34,9 +34,6 @@ class Account
         uint64_t account_id, balance, last_date_interest, next_date_interest;
         AccountType account_type;
     public:
-        Account() = delete;
-        Account(const uint64_t &id) { account_id = id; }
-
         AccountType get_account_type() { return account_type; }
 
         /* Read account information from disk file */
@@ -53,7 +50,7 @@ class Account
          * input: date_next_interest: The date of next interest settlement
          * input: associated_acct: The associated saving account, only applicable to time deposits
          */
-        virtual void init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct) = 0;
+        virtual void init(const std::string &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct) = 0;
 
         /* Put money into this account, only applicable to saving accounts
          * input: from: the account number which money comes from
@@ -71,28 +68,32 @@ class Account
          * input: desc: the description of the transaction
          * return: boolean value indicating if the transaction succeeds
          */
-        virtual bool take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) = 0;
+        virtual bool take(const std::string &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) = 0;
 
         /* Settle interest
          * input: date: Current date
          * */
         virtual uint64_t settle(const uint64_t &date) = 0;
+
+        virtual uint64_t get_saving_account() = 0;
 };
 
 class SavingAccount : public Account
 {
     protected:
-        unsigned int pin;
+        std::string pin;
         std::string kyc;
         std::vector<Transaction> transactions;
         uint64_t cumulative_balance;
     public:
+        SavingAccount(const uint64_t &id) { account_id = id; }
         void read();
         void write();
-        void init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct);
+        void init(const std::string &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct);
         void put(const uint64_t &from, const uint64_t &v, const uint64_t d, const std::string &desc);
-        bool take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc);
+        bool take(const std::string &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc);
         uint64_t settle(const uint64_t &date);
+        uint64_t get_saving_account() { return 0; }
 };
 
 class TimeDeposit : public Account
@@ -100,12 +101,14 @@ class TimeDeposit : public Account
     protected:
         uint64_t saving_acct;
     public:
+        TimeDeposit(const uint64_t &id) { account_id = id; }
         void read();
         void write();
-        void init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct);
+        void init(const std::string &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct);
         void put(const uint64_t &from, const uint64_t &v, const uint64_t d, const std::string &desc) {}
-        bool take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) { return false; }
+        bool take(const std::string &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) { return false; }
         uint64_t settle(const uint64_t &date);
+        uint64_t get_saving_account() { return saving_acct; }
 };
 
 #endif // ACCOUNT_H_

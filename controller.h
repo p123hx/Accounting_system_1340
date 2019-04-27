@@ -22,6 +22,8 @@ class Controller
          */
         bool exec_transaction(const uint64_t &from, const uint64_t &to, const uint64_t &value, const std::string &pin, const uint64_t &date, const std::string &desc);
 
+        uint64_t allocate_id();
+
     public:
         // Read information from database on start up
         void read();

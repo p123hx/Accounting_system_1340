@@ -37,7 +37,7 @@ void SavingAccount::write()
     fout.close();
 }
 
-void SavingAccount::init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct)
+void SavingAccount::init(const std::string &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct)
 {
     pin = _pin;
     kyc = _kyc;
@@ -51,7 +51,7 @@ void SavingAccount::put(const uint64_t &from, const uint64_t &v, const uint64_t 
     transactions.emplace_back(from, account_id, v, d, desc);
 }
 
-bool SavingAccount::take(const uint32_t &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc)
+bool SavingAccount::take(const std::string &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc)
 {
     if(_pin != pin || balance < v)
         return false;
@@ -85,7 +85,7 @@ void TimeDeposit::write()
     fout.close();
 }
 
-void TimeDeposit::init(const unsigned int &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct)
+void TimeDeposit::init(const std::string &_pin, const std::string &_kyc, const uint64_t &value, const uint64_t &date_now, const uint64_t &date_next_interest, const uint64_t &associated_acct)
 {
     balance = value;
     last_date_interest = date_now;
