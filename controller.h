@@ -11,6 +11,17 @@ class Controller
         std::map<uint64_t, Account*> accounts;
         uint64_t calendar;
 
+        /* Transfer money
+         * input: from: the account where money comes from
+         * input: to: the account where money will go to
+         * input: value: the amount of money to be transfered
+         * input: pin: PIN for verification if necessary
+         * input: date: the date of the transaction
+         * input: desc: the description of the transaction
+         * return: boolean value indicating if the transaction succeeds
+         */
+        bool exec_transaction(const uint64_t &from, const uint64_t &to, const uin64_t &value, const unsigned int &pin, const uint64_t &date, const std::string &desc);
+
     public:
         // Read information from database on start up
         void read();
@@ -23,18 +34,15 @@ class Controller
          * input: kyc: customer's legal identification
          * return: the account number in 64-bit unsigned integer format, 0 if failed to open an account
          */
-        uint64_t open_account(const unsigned int &pin, const std::string &kyc);
+        uint64_t open_account(const std::string &pin, const std::string &kyc);
 
-        /* Transfer money
-         * input: from: the account where money comes from
-         * input: to: the account where money will go to
-         * input: value: the amount of money to be transfered
-         * input: pin: PIN for verification if necessary
-         * input: date: the date of the transaction
-         * input: desc: the description of the transaction
-         * return: boolean value indicating if the transaction succeeds
-         */
-        bool transfer(const uint64_t &from, const uint64_t &to, const uin64_t &value, const unsigned int &pin, const uint64_t &date, const std::string &desc);
+        bool deposit(const uint64_t &account_id, const uint64_t &value);
+
+        bool withdraw(const uint64_t &account_id, const uint64_t &value, const std::string &pin);
+
+        bool purchase(const uint64_t &account_id, const uint64_t &value, const std::string &pin);
+
+        bool transfer(const uint64_t &from, const uint64_t &to, const uin64_t &value, const unsigned int &pin);
 };
 
 #endif // CONTROLLER_H_
