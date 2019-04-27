@@ -30,9 +30,8 @@ ACCOUNTING::ACCOUNTING()
         << " TRANSFER - Transfer\n SETTLE - Settle interests \n CLOSE - delete account \n EXIT - Exit the system\n";
         std::string customerInput;
         std::cin >> customerInput;
-        switch (customerInput)
+        if( customerInput == "OPEN")
         {
-          case "OPEN":
             std::cout << "Open an account:\nPlease enter customer identity\n";
             std::string KYC; std::cin >> KYC;
             std::cout<<"Please set up your 6-digit password PIN\n";
@@ -46,9 +45,10 @@ ACCOUNTING::ACCOUNTING()
             int ACCT=controller.open_account(PIN,KYC);
             if (ACCT==0) std::cout << "No more account number available." << '\n';
             else std::cout << "Your account is created, account number is:  "<< ACCT<< '\n';
-             break;
+        }
 
-          case "DEPOSIT":
+        else if (customerInput == "DEPOSIT")
+        {
             std::cout << "please enter the account number you want to deposit to" << '\n';
             int ACCT; std::cin >> ACCT;
             std::cout << "please enter the amount of money" << '\n';
@@ -56,88 +56,93 @@ ACCOUNTING::ACCOUNTING()
             if(controller.deposit(ACCT,VALUE))
             std::cout << "Success!" << '\n';
             else std::cout << "System busy, try later" << '\n';
-            break;
-          case "WITHDRAW":
+        }
+        else if (customerInput == "WITHDRAW")
+        {
             std::cout << "please enter the account number you want to withdraw from" << '\n';
             int ACCT; std::cin>>ACCT;
             std::cout << "please enter the amount of money" << '\n';
             int VALUE; std::cin>>VALUE;
             std::cout << "please enter your account PIN" << '\n';
-            string PIN; std::cin>>PIN;
+            std::string PIN; std::cin>>PIN;
             if(controller.withdraw(ACCT,VALUE,PIN))
             std::cout << "Success!" << '\n';
             else std::cout << "System busy, try later" << '\n';
-            break;
+        }
 
-          case "PURCHASE":
+        else if (customerInput == "PURCHASE")
+        {
             std::cout << "please enter the account number you want to purchase from" << '\n';
             int ACCT; std::cin >> ACCT;
             std::cout << "please enter the amount of money" << '\n';
             int VALUE; std::cin >> VALUE;
             std::cout << "please enter your account PIN" << '\n';
-            string PIN; std::cin >> PIN;
+            std::string PIN; std::cin >> PIN;
             if(controller.purchase(ACCT,VALUE,PIN))
             std::cout << "Success!" << '\n';
             else std::cout << "System busy, try later" << '\n';
-            break;
+        }
 
-          case "TIME":
+        else if (customerInput == "TIME")
+        {
           std::cout << "please enter the account number you want to attempt a time depost from" << '\n';
           int ACCT; std::cin >> ACCT;
           std::cout << "please enter the amount of money" << '\n';
           int VALUE; std::cin >> VALUE;
           std::cout << "please enter your account PIN" << '\n';
-          string PIN; std::cin >> PIN;
+          std::string PIN; std::cin >> PIN;
           std::cout << "please enter the period in days" << '\n';
           int PERIOD; std::cin >> PERIOD;
           if(controller.time_deposit(ACCT,VALUE,PIN,PERIOD))
           std::cout << "Success!" << '\n';
           else std::cout << "System busy, try later" << '\n';
-          break;
+        }
 
-          case "TRANSFER":
+        else if (customerInput == "TRANSFER")
+        {
           std::cout << "please enter the account number you want to transfer from" << '\n';
-          int ACCTO_FROM; std::cin >> ACCT_FROM;
+          int ACCT_FROM; std::cin >> ACCT_FROM;
           std::cout << "please enter the account number you want to transfer to" << '\n';
           int ACCT_TO; std::cin >> ACCT_TO;
           std::cout << "please enter the amount of money" << '\n';
           int VALUE; std::cin >> VALUE;
           std::cout << "please enter your account PIN" << '\n';
-          string PIN; std::cin >> PIN;
-          if(controller.transfer(ACCT_FROM,ACCT
-            ,VALUE,PIN,PERIOD))
+          std::string PIN; std::cin >> PIN;
+          if(controller.transfer(ACCT_FROM,ACCT_TO
+            ,VALUE,PIN))
           std::cout << "Success!" << '\n';
           else std::cout << "System busy, try later" << '\n';
-          break;
+        }
 
-          case "SETTLE":
+        else if (customerInput == "SETTLE")
+        {
           controller.settle();
-          break;
+        }
 
-          case "CLOSE":
+        else if (customerInput == "CLOSE")
+        {
           std::cout << "please enter the account number you want to close" << '\n';
           int ACCT; std::cin>>ACCT;
           std::cout << "please enter your account PIN" << '\n';
-          string PIN; std::cin>>PIN;
+          std::string PIN; std::cin>>PIN;
           if(controller.close_account(ACCT,PIN))
           std::cout << "Success!" << '\n';
           else std::cout << "System busy, try later" << '\n';
-          break;
+        }
 
-          case "EXIT";
+        else if (customerInput == "EXIT")
+        {
             std::cout << "Exiting the system" << '\n';
             exitedUser=true;
+        }
 
-          default:{
+        else {
             std::cout << "you did not enter a valid command. Try again." << '\n';
-            break;
           }
 
         }
       }
 
-
-  }
 
 // to authenticate user if user's input matches
   void ACCOUNTING::authenticate()
@@ -146,11 +151,11 @@ ACCOUNTING::ACCOUNTING()
     std::string username;
     // database is stored with the username as the filename;
     // failing in finding the file is equivalent to failing in finding the username
-    std::ifsteam fin;
+    std::ifstream fin;
     fin.open(username);
     if (fin.fail())
     {
-      std::cout<<"user not found\n;"
+      std::cout<<"user not found\n";
       exit(1);
     }
     else
@@ -162,7 +167,7 @@ ACCOUNTING::ACCOUNTING()
       if (pin == pinInput) userAuthenticated = true;
       else
       {
-        cout<<"Invalid PIN.\n";
+        std::cout<<"Invalid PIN.\n";
       }
     }
 
