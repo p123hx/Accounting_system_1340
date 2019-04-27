@@ -8,7 +8,7 @@ std::string account_database_filename(uint64_t id)
     std::string result;
     while(id)
     {
-        result += static_cast<char>(id % 10 - '0');
+        result += static_cast<char>(id % 10 + '0');
         id /= 10;
     }
     std::reverse(result.begin(), result.end());
