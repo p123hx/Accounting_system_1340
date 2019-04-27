@@ -3,7 +3,6 @@
 #ifndef ACCOUNTING_H
 #define ACCOUNTING_H
 
-#include "BankData.h"
 #include "controller.h"
 
 class ACCOUNTING
