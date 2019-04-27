@@ -8,7 +8,7 @@ std::string account_database_filename(uint64_t id)
     std::string result;
     while(id)
     {
-        result += static_cast<char>(id % 10 - '0');
+        result += static_cast<char>(id % 10 + '0');
         id /= 10;
     }
     std::reverse(result.begin(), result.end());
@@ -69,6 +69,13 @@ uint64_t SavingAccount::settle(const uint64_t &date)
         next_date_interest = date + next_date_interest - last_date_interest;
         cumulative_balance = 0;
     }
+    return 0;
+}
+
+uint64_t SavingAccount::query_balance(const std::string &_pin)
+{
+    if(pin == _pin)
+        return balance;
     return 0;
 }
 

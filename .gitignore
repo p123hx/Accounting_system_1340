@@ -6,3 +6,8 @@ banking
 
 # Debugging Symbols
 *.dSYM
+
+# Program data
+admin
+*.record
+

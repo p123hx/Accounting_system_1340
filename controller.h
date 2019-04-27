@@ -50,6 +50,8 @@ class Controller
 
         bool time_deposit(const uint64_t &account_id, const uint64_t &value, const std::string &pin, const uint64_t &period);
 
+        uint64_t query_balance(const uint64_t &account_id, const std::string &pin);
+
         void settle();
 };
 
