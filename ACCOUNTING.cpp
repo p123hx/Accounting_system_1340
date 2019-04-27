@@ -1,13 +1,13 @@
 //ACCOUNTING.cpp
 //Member-function definitions for class ACCOUNTING
 #include "ACCOUNTING.h"//ACCOUNTING class definition
-#include iostream
-#include fstream
-#include string
+#include <iostream>
+#include <fstream>
+#include <string>
 
 //ACCOUNTING default constructor initializes data member
 ACCOUNTING::ACCOUNTING()
-  : userAuthenticated(flase) //user is not authenticated to start
+  : userAuthenticated(false) //user is not authenticated to start
   {
     //empty body
   }// end ACCOUNTING default constructor
