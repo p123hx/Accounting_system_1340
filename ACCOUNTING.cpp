@@ -130,7 +130,7 @@ ACCOUNTING::ACCOUNTING()
           int ACCT; std::cin>>ACCT;
           std::cout << "please enter your account PIN" << '\n';
           std::string PIN; std::cin>>PIN;
-          std::cout<<controller.close_account(ACCT,PIN));
+          std::cout<<controller.close_account(ACCT,PIN);
         }
 
 
@@ -165,7 +165,6 @@ ACCOUNTING::ACCOUNTING()
   {
     std::cout<<("Entre your user name\n");
     std::string username;
-    std::cin >> username;
     // database is stored with the username as the filename;
     // failing in finding the file is equivalent to failing in finding the username
     std::cin >> username;
