@@ -139,18 +139,13 @@ ACCOUNTING::ACCOUNTING()
 
   void ACCOUNTING::authenticate()
   {
-    std::cout<<("Entre your account number\n");
-    std::int accountNumInt;
-    std::string accountNumStr;
-    std::cin >> accountNumInt;
-    std::stringstream ss;
-    ss << accountNumInt;
-    accountNumStr=ss.str();
+    std::cout<<("Entre your user name\n");
+    std::string username;
     std::ifsteam fin;
-    fin.open(accountNumStr);
+    fin.open(username);
     if (fin.fail())
     {
-      std::cout <<"account not found\n;"
+      std::cout <<"user not found\n;"
       exit(1);
     }
     else
