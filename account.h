@@ -76,6 +76,8 @@ class Account
         virtual uint64_t settle(const uint64_t &date) = 0;
 
         virtual uint64_t get_saving_account() = 0;
+
+        virtual uint64_t query_balance(const std::string &pin) = 0;
 };
 
 class SavingAccount : public Account
@@ -94,6 +96,7 @@ class SavingAccount : public Account
         bool take(const std::string &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc);
         uint64_t settle(const uint64_t &date);
         uint64_t get_saving_account() { return 0; }
+        uint64_t query_balance(const std::string &_pin);
 };
 
 class TimeDeposit : public Account
@@ -109,6 +112,7 @@ class TimeDeposit : public Account
         bool take(const std::string &_pin, const uint64_t &to, const uint64_t &v, const uint64_t d, const std::string &desc) { return false; }
         uint64_t settle(const uint64_t &date);
         uint64_t get_saving_account() { return saving_acct; }
+        uint64_t query_balance(const std::string &pin) { return 0; }
 };
 
 #endif // ACCOUNT_H_

@@ -54,4 +54,5 @@ In the main loop, the program waits for command input, then processes the specif
 | `TRANSFER ACCT-FROM ACCT-TO VALUE PIN` | Attempt to transfer money from `ACCT-FROM` to `ACCT-TO` of `VALUE` amount of money, in cents, with `PIN` |
 | `SETTLE` | Settle interests of the day, and step a day in the calendar. |
 | `CLOSE ACCT PIN` | Attempt to close account `ACCT` with `PIN` |
+| `BALANCE ACCT PIN` | Attempt to query balance of account `ACCT` with `PIN` |
 

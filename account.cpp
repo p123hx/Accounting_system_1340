@@ -72,6 +72,13 @@ uint64_t SavingAccount::settle(const uint64_t &date)
     return 0;
 }
 
+uint64_t SavingAccount::query_balance(const std::string &_pin)
+{
+    if(pin == _pin)
+        return balance;
+    return 0;
+}
+
 void TimeDeposit::read()
 {
     std::ifstream fin(account_database_filename(account_id));

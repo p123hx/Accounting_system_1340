@@ -144,3 +144,9 @@ void Controller::settle()
         accounts.erase(i);
     ++calendar;
 }
+
+uint64_t Controller::query_balance(const uint64_t &account_id, const std::string &pin)
+{
+    if(accounts.find(account_id) == accounts.end()) return 0;
+    return accounts[account_id]->query_balance(pin);
+}
