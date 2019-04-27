@@ -14,7 +14,6 @@ public:
 private:
   Controller controller;
   bool userAuthenticated;
-  int currentAccountNum;
 
   void authenticate();
 };
