@@ -40,7 +40,10 @@ void Controller::write()
     std::ofstream fout("controller.record");
     fout << calendar << std::endl;
     for(const auto &i : accounts)
+    {
         fout << i.first << ' ' << (i.second->get_account_type() == SAVING ? "SAVING" : "TIME" ) << std::endl;
+        i.second->write();
+    }
     fout.close();
 }
 

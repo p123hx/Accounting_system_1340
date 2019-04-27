@@ -15,8 +15,9 @@ ACCOUNTING::ACCOUNTING()
   // start runnning ACCOUTNING
   void ACCOUNTING::run()
   {
+      controller.read();
       // loop while user is not yet authenticated
-      while(userAuthenticated)
+      while(!userAuthenticated)
       {
         std::cout << "Accounting system is initiated, pls type in Accounting number and PIN\n";
         authenticate();// user will be authenticated if pin matches the database
@@ -141,6 +142,7 @@ ACCOUNTING::ACCOUNTING()
           }
 
         }
+        controller.write();
       }
 
 
@@ -151,6 +153,7 @@ ACCOUNTING::ACCOUNTING()
     std::string username;
     // database is stored with the username as the filename;
     // failing in finding the file is equivalent to failing in finding the username
+    std::cin >> username;
     std::ifstream fin;
     fin.open(username);
     if (fin.fail())
