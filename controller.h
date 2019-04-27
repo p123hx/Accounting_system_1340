@@ -36,6 +36,8 @@ class Controller
          */
         uint64_t open_account(const std::string &pin, const std::string &kyc);
 
+        bool close_account(const uint64_t &account_id, const std::string &pin);
+
         bool deposit(const uint64_t &account_id, const uint64_t &value);
 
         bool withdraw(const uint64_t &account_id, const uint64_t &value, const std::string &pin);
@@ -43,6 +45,10 @@ class Controller
         bool purchase(const uint64_t &account_id, const uint64_t &value, const std::string &pin);
 
         bool transfer(const uint64_t &from, const uint64_t &to, const uin64_t &value, const unsigned int &pin);
+
+        bool time_deposit(const uint64_t &account_id, const uint64_t &value, const std::string &pin, const uint64_t &period);
+
+        void settle();
 };
 
 #endif // CONTROLLER_H_
