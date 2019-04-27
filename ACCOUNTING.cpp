@@ -75,12 +75,52 @@ ACCOUNTING::ACCOUNTING()
             std::cout << "please enter your account PIN" << '\n';
             string PIN; cin>>PIN;
             if(controller.purchase(ACCT,VALUE,PIN))
-
             std::cout << "Success!" << '\n';
             else std::cout << "System busy, try later" << '\n';
             break;
 
-          case "TIME"
+          case "TIME":
+          std::cout << "please enter the account number you want to attempt a time depost from" << '\n';
+          int ACCT; cin>>ACCT;
+          std::cout << "please enter the amount of money" << '\n';
+          int VALUE; cin>>VALUE;
+          std::cout << "please enter your account PIN" << '\n';
+          string PIN; cin>>PIN;
+          std::cout << "please enter the period in days" << '\n';
+          int PERIOD; cin>>PERIOD;
+          if(controller.time_deposit(ACCT,VALUE,PIN,PERIOD))
+          std::cout << "Success!" << '\n';
+          else std::cout << "System busy, try later" << '\n';
+          break;
+
+          case "TRANSFER":
+          std::cout << "please enter the account number you want to transfer from" << '\n';
+          int ACCTO_FROM; cin>>ACCT_FROM;
+          std::cout << "please enter the account number you want to transfer to" << '\n';
+          int ACCT_TO; cin>>ACCT_TO;
+          std::cout << "please enter the amount of money" << '\n';
+          int VALUE; cin>>VALUE;
+          std::cout << "please enter your account PIN" << '\n';
+          string PIN; cin>>PIN;
+          if(controller.transfer(ACCT_FROM,ACCT
+            ,VALUE,PIN,PERIOD))
+          std::cout << "Success!" << '\n';
+          else std::cout << "System busy, try later" << '\n';
+          break;
+
+          case "SETTLE":
+          controller.settle();
+          break;
+
+          case "CLOSE":
+          std::cout << "please enter the account number you want to close" << '\n';
+          int ACCT; cin>>ACCT;
+          std::cout << "please enter your account PIN" << '\n';
+          string PIN; cin>>PIN;
+          if(controller.close_account(ACCT,PIN))
+          std::cout << "Success!" << '\n';
+          else std::cout << "System busy, try later" << '\n';
+          break;
 
           case "EXIT";
             std::cout << "Exiting the system" << '\n';
