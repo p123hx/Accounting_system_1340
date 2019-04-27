@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 
+// no namespace std is used to avoid file polluting
 //ACCOUNTING default constructor initializes data member
 ACCOUNTING::ACCOUNTING()
   : userAuthenticated(false) //user is not authenticated to start
@@ -15,6 +16,7 @@ ACCOUNTING::ACCOUNTING()
   // start runnning ACCOUTNING
   void ACCOUNTING::run()
   {
+      // controller initiated
       controller.read();
       // loop while user is not yet authenticated
       while(!userAuthenticated)
@@ -182,7 +184,7 @@ ACCOUNTING::ACCOUNTING()
         else {
             std::cout << "you did not enter a valid command. Try again." << '\n';
           }
-
+        // loop will be exitted only when exitedUser is true
         }
         controller.write();
       }
@@ -215,10 +217,12 @@ ACCOUNTING::ACCOUNTING()
       {
         // userAuthenticated is still false so that loop will be continued
         std::cout<<"Invalid PIN.\n";
-        // username will be required to be typed in again so that 
+        // username will be required to be typed in again so that
         // guessing the PIN is prevented by extra typing time and the result of exiting if username is invalid
       }
     }
+    // close fin
     fin.close();
 
-  }//end function authenticate
+  }
+  //end function authenticate
